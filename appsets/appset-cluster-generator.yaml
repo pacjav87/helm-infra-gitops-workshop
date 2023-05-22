@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-cluster-generator
+  namespace: openshift-operators
+spec:
+  generators:
+  - clusters: # deploy only to cluster matching this label
+      selector:
+        matchLabels:
+          select-destination: 'true' # sno-1
+  template:
+    metadata:
+      name: '{{name}}-appset-cluster-generator'
+    spec:
+      project: '{{metadata.labels.project}}'
+      source:
+        repoURL: https://github.com/romerobu/helm-infra-gitops-workshop.git
+        targetRevision: ninja-talk
+        path: .
+        helm:
+          parameters:
+            - name: app.enabled
+              value: 'true'
+      destination:
+        server: '{{server}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

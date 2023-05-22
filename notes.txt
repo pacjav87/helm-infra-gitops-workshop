@@ -1,0 +1,29 @@
+
+
+
+1. Merge generator -> not working
+
+Hace merge para aplicar valores a los clusters en los que aplica la condicion, 
+en este caso un match label, pero no selecciona el destino.
+
+2. Cluster geneterator -> working
+
+It works by adding labels to the cluster destination secrets
+
+...
+  labels:
+    project: project-sno-3
+    select-destination: 'true'
+..
+
+3. Matrix generator generator -> pending to be tested
+
+Generaters repo of apps x repo of destination. Second generator can be cluster generator or fit files, while first repo must be apps mandatory.
+Yo no puedo testear esto porque no tengo un repo de apps con esa estructura y no se si se ajusta a lo que tiene el cliente.
+
+4. Cluster Decision -> pending to be tested
+
+- Necesita un CRD custom en el que definir el status
+- Si hay que definir una lista de destinos por instancia del CRD, no aporta nada extra al 
+  cluster generator y sistema de labels.
+  https://github.com/argoproj/applicationset/issues/584

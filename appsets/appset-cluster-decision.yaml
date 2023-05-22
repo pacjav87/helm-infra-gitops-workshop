@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-cluster-decision
+  namespace: openshift-operators
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: destination-clusters
+        name: cm-app-generator-test
+        requeueAfterSeconds: 30
+  template:
+    metadata:
+      name: '{{app.cluster}}-appset-merge'
+    spec:
+      project: '{{app.project}}'
+      source:
+        repoURL: https://github.com/romerobu/helm-infra-gitops-workshop.git
+        targetRevision: ninja-talk
+        path: .
+        helm:
+          parameters:
+            - name: app.enabled
+              value: 'true'
+      destination:
+        server: '{{app.server}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

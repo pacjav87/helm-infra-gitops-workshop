@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-matrix # not working
+  namespace: openshift-operators
+spec:
+  generators:
+    - matrix:
+        generators:
+          - git: # base generator, git repo for apps
+              repoURL: https://github.com/romerobu/workshop-gitops-content-deploy.git
+              revision: ninja-talk
+              files:
+              - path: "cluster-definition/**/cluster.json"   
+          - clusters: # (iterate) app of git generator x destination
+              selector:
+                matchLabels:
+                  select-destination: 'true'
+  template:
+    metadata:
+      name: '{{cluster.name}}-appset-merge'
+    spec:
+      project: '{{project}}'
+      source:
+        repoURL: https://github.com/romerobu/helm-infra-gitops-workshop.git
+        targetRevision: ninja-talk
+        path: .
+        helm:
+          parameters:
+            - name: app.enabled
+              value: 'true'
+      destination:
+        server: '{{cluster.address}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

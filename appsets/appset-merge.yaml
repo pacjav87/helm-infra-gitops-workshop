@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: appset-merge
+  namespace: openshift-operators
+spec:
+  generators:
+    # merge 'parent' generator
+    - merge:
+        mergeKeys:
+          - server
+        generators:
+          - git: # base generator, select destination clusters
+              repoURL: https://github.com/romerobu/workshop-gitops-content-deploy.git
+              revision: ninja-talk
+              files:
+              - path: "cluster-definition/**/cluster.json"   
+          - clusters: # deploy only to cluster matching this label
+              selector:
+                matchLabels:
+                  select-destination: 'true'
+  template:
+    metadata:
+      name: '{{cluster.name}}-appset-merge'
+    spec:
+      project: '{{project}}'
+      source:
+        repoURL: https://github.com/romerobu/helm-infra-gitops-workshop.git
+        targetRevision: ninja-talk
+        path: .
+        helm:
+          parameters:
+            - name: app.enabled
+              value: 'true'
+      destination:
+        server: '{{cluster.address}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

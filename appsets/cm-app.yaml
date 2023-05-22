@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cm-app-generator-test
+  namespace: openshift-operators
+data: {}
+status:
+  decisions:
+  - app:
+    - cluster: sno-1
+      project: project-sno-1
+      server: https://api.sno-1.sandbox2792.opentlc.com:6443
+    - cluster: sno-3
+      project: project-sno-3
+      server: https://api.sno-3.sandbox2792.opentlc.com:6443

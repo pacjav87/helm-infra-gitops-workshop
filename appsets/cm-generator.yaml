@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: destination-clusters
+  namespace: openshift-operators
+data:
+  apiVersion: v1
+  kind: configmap
+  statusListKey: decisions
+  matchKey: app
