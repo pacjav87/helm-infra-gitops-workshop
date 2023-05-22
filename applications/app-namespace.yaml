@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sno-1-namespace
+  namespace: openshift-gitops
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    helm:
+      valueFiles:
+        - values-namespace.yaml
+    path: .
+    repoURL: 'https://github.com/romerobu/helm-infra-gitops-workshop.git'
+    targetRevision: ninja-talk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

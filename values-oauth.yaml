@@ -1,0 +1,9 @@
+oauth:
+  enabled: true # Enable dependency
+  keycloak: # Update chart values
+    clientid: myclient-<name>
+    issuer: https://keycloak-keycloak.apps.argo-hub.<domain>.opentlc.com/realms/myrealm-<name>;
+    data: <your_keycloak_secret_data>
+  ldap:
+    sync:
+      ldap_url: 'ldap://<ip>:<nodeport>'
