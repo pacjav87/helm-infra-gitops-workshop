@@ -11,7 +11,7 @@ apps:
         app: details
         version: v1
       image:
-        repository: docker.io/maistra/examples-bookinfo-details
+        repository: docker.io/istio/examples-bookinfo-details
         pullPolicy: IfNotPresent
         # Overrides the image tag whose default is the chart appVersion.
         tag: "0.12.0"
@@ -23,7 +23,7 @@ apps:
         app: productpage
         version: v1
       image:
-        repository: docker.io/maistra/examples-bookinfo-productpage
+        repository: docker.io/istio/examples-bookinfo-productpage
         pullPolicy: IfNotPresent
         # Overrides the image tag whose default is the chart appVersion.
         tag: "0.12.0" 
@@ -35,7 +35,7 @@ apps:
         app: ratings
         version: v1
       image:
-        repository: docker.io/maistra/examples-bookinfo-ratings
+        repository: docker.io/istio/examples-bookinfo-ratings
         pullPolicy: IfNotPresent
         # Overrides the image tag whose default is the chart appVersion.
         tag: "0.12.0"
@@ -47,7 +47,7 @@ apps:
         app: reviews
         version: v1
       image:
-        repository: docker.io/maistra/examples-bookinfo-reviews
+        repository: docker.io/istio/examples-bookinfo-reviews
         pullPolicy: IfNotPresent
         # Overrides the image tag whose default is the chart appVersion.
         tag: "0.12.0"
@@ -58,7 +58,7 @@ apps:
         app: reviews
         version: v2
       image:
-        repository: docker.io/maistra/examples-bookinfo-reviews
+        repository: docker.io/istio/examples-bookinfo-reviews
         pullPolicy: IfNotPresent
         # Overrides the image tag whose default is the chart appVersion.
         tag: "0.12.0"
@@ -69,7 +69,7 @@ apps:
         app: reviews
         version: v3
       image:
-        repository: docker.io/maistra/examples-bookinfo-reviews
+        repository: docker.io/istio/examples-bookinfo-reviews
         pullPolicy: IfNotPresent
         # Overrides the image tag whose default is the chart appVersion.
         tag: "0.12.0"
