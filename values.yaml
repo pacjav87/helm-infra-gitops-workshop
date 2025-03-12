@@ -1,12 +1,5 @@
 oauth:
-  enabled: true # Enable dependency
-  keycloak: # Update chart values
-    clientid: myclient-13
-    issuer: https://keycloak-ingress-keycloak.apps.argo-hub.sandbox2414.opentlc.com/realms/myrealm-13
-    data: LsxWXz5bAd4TbaGuvxGVCEzslPzz0OiMgit 
-  ldap:
-    sync:
-      ldap_url: 'ldap://10.0.76.253:30389'
+  enabled: false
 bookinfo:
   enabled: false
 operators: 
@@ -26,4 +19,3 @@ global:
   argocd:
     enabled: true
     controller: openshift-gitops #argocd
-    
